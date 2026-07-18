@@ -4,4 +4,6 @@
 *.bbl
 *.blg
 *.out
+*.synctex.gz
+manuscript/manuscript.pdf
 __pycache__/

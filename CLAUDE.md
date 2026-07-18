@@ -45,9 +45,21 @@ Phases (full context: `docs/phase0_dependency_trace.md`):
       SVD runs in float32 and the sub-leading GMST-PC2 mode (small s₂→s₃ gap) is
       LAPACK/BLAS-sensitive. Accepted under the visual-identity standard;
       documented in README. Port keeps float32 to match the oracle exactly.
-- [ ] Phase 4 — manuscript copy: relativize `\includegraphics`/`\input` paths
-      (Edit tool, never sed on .tex), extract cited-only bib entries from the
-      `.aux`, compile, PDF-diff against an oracle compile
+- [x] Phase 4 — manuscript copy in `manuscript/`: `manuscript.tex` with all 18
+      figure/table paths relativized to `../figures/` + `../tables/` (19 lines
+      changed, nothing else); local `agujournal2019.cls`. Cited-only bib (38
+      entries) extracted **verbatim** from `all.bib` via `manuscript/extract_bib.py`
+      (provenance only — needs external `all.bib`, not in `make all`); `references.bib`
+      is a frozen committed source. NB `bibexport` was rejected: it silently drops
+      non-standard `day` fields and needs `@string` resolution — verbatim copy of
+      each entry + all 96 `@string` macros yields a `.bbl` byte-identical to a
+      full-`all.bib` compile. Compiles self-contained; PDF-diff vs a fresh oracle
+      compile is pixel-identical on all text/layout/reference pages. Remaining
+      figure/table page diffs (7,9,12,15,23,25) are the same float32 SVD exception
+      as Phase 3 — surfacing as the **N34-PC2** mode in the figures (all GMST-PC
+      panels clean) and GMST-PC2 in `regression_table_full`. Build products
+      (`manuscript.{aux,bbl,blg,log,pdf}`) gitignored. `references.bib` reflects
+      the current `all.bib` (concept DOI `...20514350`, matching this file).
 - [ ] Phase 5 — environment lock (from `pangeo-2025`, pruned), Makefile
       (`all`/`figures`/`tables`/`manuscript`/`notebooks`/`verify`), README with
       the reproduction map, notebook build
