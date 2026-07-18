@@ -33,10 +33,18 @@ Phases (full context: `docs/phase0_dependency_trace.md`):
 
 - [x] Phase 0 — dependency trace (see docs/)
 - [x] Phase 1 — scaffold, data copies + checksums (this commit)
-- [ ] Phase 2 — port the two scripts (copy → retarget to `data/` → trim to the
-      mapped outputs → percent-format narration). Trim strictly by the trace's
-      KEEP/CUT lists; mind the "trim traps" section.
-- [ ] Phase 3 — run + verify against the oracle (gates above)
+- [x] Phase 2 — ported both scripts to `scripts/*.py` (jupytext percent):
+      retargeted to `data/`, trimmed by the trace's KEEP/CUT lists, trim traps
+      kept. `nmme_comparison.py` aliases the one archive NMME file to both
+      original pickles (`init_time→S`, `member→M`, `lead→L`, `obs_n34→obs`).
+- [x] Phase 3 — ran + verified against the oracle. 5/6 tables diff
+      character-identical; all 12 figures within the visual-identity standard
+      (most pixel-identical). **Known exception:** `regression_table_full.tex`
+      differs by one last-digit unit in two GMST-PC2 cells — the archive stores
+      the obs series as float32 (bit-identical to the oracle raw data), so the
+      SVD runs in float32 and the sub-leading GMST-PC2 mode (small s₂→s₃ gap) is
+      LAPACK/BLAS-sensitive. Accepted under the visual-identity standard;
+      documented in README. Port keeps float32 to match the oracle exactly.
 - [ ] Phase 4 — manuscript copy: relativize `\includegraphics`/`\input` paths
       (Edit tool, never sed on .tex), extract cited-only bib entries from the
       `.aux`, compile, PDF-diff against an oracle compile
