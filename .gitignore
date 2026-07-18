@@ -6,4 +6,11 @@
 *.out
 *.synctex.gz
 manuscript/manuscript.pdf
+manuscript/manuscript.fdb_latexmk
+manuscript/manuscript.fls
 __pycache__/
+
+# build intermediates
+.build/
+.verify/
+notebooks/*.ipynb

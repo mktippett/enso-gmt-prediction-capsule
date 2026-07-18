@@ -1,0 +1,31 @@
+# Locked environment for the reproduction capsule, pruned from the source
+# project's `pangeo-2025` environment to only what the ported scripts, the
+# notebook build, and `make verify` require. Versions are pinned to those used
+# to generate the committed reference outputs.
+#
+#   conda env create -f environment.yml   # or:  mamba env create -f environment.yml
+#   conda activate enso-gmt-capsule
+#
+# Cross-platform note: versions are pinned, build strings are not, so the same
+# spec resolves on osx-arm64, linux-64, etc. The float32 SVD's sub-leading
+# (PC2) modes are BLAS/LAPACK-sensitive; see README "Known limitation".
+name: enso-gmt-capsule
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13.3
+  # ── analysis stack (both scripts) ──
+  - numpy=2.2.4
+  - pandas=2.2.3
+  - xarray=2025.3.1
+  - scipy=1.15.2
+  - statsmodels=0.14.4
+  - netcdf4=1.7.2
+  - matplotlib-base=3.10.1
+  # ── notebook build (jupytext -> execute) ──
+  - jupytext=1.19.3
+  - nbconvert=7.16.6
+  - nbformat=5.10.4
+  - ipykernel
+  # ── verification: pdftoppm render for the figure pixel-diff ──
+  - poppler

@@ -36,6 +36,7 @@
 # `_June_p`, `_June_p_n34`, `_June_p_n34obs`) are retained.
 
 # %%
+import os
 from pathlib import Path
 
 import numpy as np
@@ -49,12 +50,23 @@ matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 
 # ── Paths ──────────────────────────────────────────────────────────────────
-_ROOT       = Path(__file__).parent.parent
+# _ROOT is the capsule root (holds data/, scripts/, figures/, tables/). As a
+# script __file__ gives it directly; executed as a notebook (jupytext --execute)
+# __file__ is undefined, so fall back to the nearest ancestor of the CWD that
+# contains data/.
+try:
+    _ROOT = Path(__file__).resolve().parent.parent
+except NameError:
+    _ROOT = next((p for p in [Path.cwd(), *Path.cwd().parents]
+                  if (p / 'data').is_dir()), Path.cwd())
 DATA_DIR    = _ROOT / 'data'
-FIGURES_DIR = _ROOT / 'figures'
-TABLES_DIR  = _ROOT / 'tables'
-FIGURES_DIR.mkdir(exist_ok=True)
-TABLES_DIR.mkdir(exist_ok=True)
+# Output dirs default to the capsule's figures/ and tables/. `make verify`
+# overrides them (CAPSULE_FIGURES_DIR / CAPSULE_TABLES_DIR) to build into a
+# scratch tree and diff against the committed reference copies.
+FIGURES_DIR = Path(os.environ.get('CAPSULE_FIGURES_DIR', _ROOT / 'figures'))
+TABLES_DIR  = Path(os.environ.get('CAPSULE_TABLES_DIR',  _ROOT / 'tables'))
+FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+TABLES_DIR.mkdir(parents=True, exist_ok=True)
 
 # ── Plot helpers ───────────────────────────────────────────────────────────
 prop_cycle = plt.rcParams['axes.prop_cycle']

@@ -70,7 +70,7 @@ with open(out_path, "w") as f:
         "% Cited-only bibliography for the ENSO-conditioned GMST capsule.\n"
         "% Frozen source file: this is what the manuscript builds against.\n"
         "% Extracted verbatim (every field preserved, including non-standard\n"
-        "% `day` fields and @string abbreviations) from the manuscript's master\n"
+        "% `day` fields and string-macro abbreviations) from the master\n"
         "% all.bib by manuscript/extract_bib.py. That regeneration is provenance\n"
         "% only -- it needs the external all.bib and is NOT part of `make all`.\n"
         "% Do not hand-edit.\n\n"

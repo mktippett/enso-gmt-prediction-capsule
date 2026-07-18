@@ -60,9 +60,27 @@ Phases (full context: `docs/phase0_dependency_trace.md`):
       panels clean) and GMST-PC2 in `regression_table_full`. Build products
       (`manuscript.{aux,bbl,blg,log,pdf}`) gitignored. `references.bib` reflects
       the current `all.bib` (concept DOI `...20514350`, matching this file).
-- [ ] Phase 5 — environment lock (from `pangeo-2025`, pruned), Makefile
-      (`all`/`figures`/`tables`/`manuscript`/`notebooks`/`verify`), README with
-      the reproduction map, notebook build
+- [x] Phase 5 — build system + docs. `environment.yml`: version-pinned, pruned
+      from `pangeo-2025` (analysis stack + jupytext/nbconvert + `poppler` for the
+      verify render; env name `enso-gmt-capsule`). `Makefile` targets
+      `all`/`figures`/`tables`/`manuscript`/`notebooks`/`verify`/`clean`
+      (`PYTHON ?=` override; per-script stamps in `.build/` so `all` runs each
+      script once; `manuscript` = `latexmk`; `notebooks` = `$(PYTHON) -m jupytext
+      --execute`). `scripts/verify.py` rebuilds into `.verify/` and compares to
+      the committed `figures/`+`tables/` — tables char-identical, figures
+      `pdftoppm`@150dpi + per-pixel diff (matplotlib reader, no ImageMagick dep);
+      reports EXACT/WITHIN-TOL/WARN/FAIL, `regression_table_full` float32 case is
+      WARN-not-FAIL. README rewritten with the reproduction map. **On-machine
+      result: 18/18 EXACT, `make all` leaves figures/tables git-clean.**
+      Three script changes (both scripts, behaviour-preserving in script mode):
+      (1) `import os`; (2) output dirs read `CAPSULE_FIGURES_DIR`/
+      `CAPSULE_TABLES_DIR` (default unchanged) so verify builds to scratch;
+      (3) `_ROOT` now falls back from `__file__` to a CWD-ancestor search, since
+      `__file__` is undefined under `jupytext --execute`. Bug found + fixed:
+      `references.bib`'s header comment contained the literal `@string`, which
+      BibTeX parses (it has no `%` comments) → non-fatal error that still broke
+      `latexmk`; reworded to "string-macro" in both `references.bib` and
+      `extract_bib.py`. `.bbl` content is unchanged (comment is not an entry).
 - [ ] Phase 6 — clean-machine test (fresh clone + locked env), GitHub publish,
       Zenodo-GitHub integration for a capsule DOI, optional Binder badge
 
