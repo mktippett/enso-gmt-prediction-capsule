@@ -8,6 +8,16 @@ Everything needed — and nothing more — to reproduce the figures and tables o
 **Contract:** `make all` regenerates all 12 figures and 6 tables used by the
 manuscript from the frozen data in `data/` alone.
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mktippett/enso-gmt-prediction-capsule/HEAD)
+
+## Run in the browser (Binder)
+
+The badge above launches the capsule on [Binder](https://mybinder.org), which
+builds the pinned environment straight from `environment.yml` — no local install.
+Open a terminal there and run `make all` / `make verify`, or open either
+`scripts/*.py` (jupytext percent format) directly in JupyterLab, where the
+installed `jupytext` renders them as notebooks.
+
 ## Quick start
 
 ```bash
@@ -95,6 +105,10 @@ On the machine and BLAS/LAPACK build that generated the reference outputs the
 match is exact (18/18 outputs). On other hardware, **visual identity** is the
 standard (sub-percent pixel shifts in the sub-leading modes are possible — see
 below); `verify` reports each output as `EXACT`, `WITHIN-TOL`, or `FAIL`.
+
+The figure PDFs are written with `savefig(..., metadata={'CreationDate': None})`
+so their bytes carry no build timestamp: `make all` is byte-reproducible and
+leaves a clean `git status` on any machine that reproduces the pixels exactly.
 
 ### Known limitation — `regression_table_full.tex` (float32 SVD, sub-leading modes)
 

@@ -303,7 +303,7 @@ for col, (EOF, PC, var, label, prefix) in enumerate([
     ax.legend(fontsize=8, loc='lower left' if col == 1 else 'best')
 
 label_fig(axs.flatten(), 'eofs_pcs')
-fig.savefig(FIGURES_DIR / 'eofs_pcs.pdf', bbox_inches='tight')
+fig.savefig(FIGURES_DIR / 'eofs_pcs.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 plt.show()
 
 # %% [markdown]
@@ -349,7 +349,7 @@ for ax, orig_plot, recon_plot, orig_anom, recon_anom, label, ylabel in [
     ax.legend(fontsize=8)
 
 label_fig(axs, 'reconstruction_2pc')
-fig.savefig(FIGURES_DIR / 'reconstruction_2pc.pdf', bbox_inches='tight')
+fig.savefig(FIGURES_DIR / 'reconstruction_2pc.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 plt.show()
 
 # %% [markdown]
@@ -399,7 +399,7 @@ for ax, mat, xlabels, ylabels, title in [
     ax.set_title(f'PC cross-correlations ({title})')
 
 label_fig(axs, 'pc_correlations')
-fig.savefig(FIGURES_DIR / 'pc_correlations.pdf', bbox_inches='tight')
+fig.savefig(FIGURES_DIR / 'pc_correlations.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 plt.show()
 
 # %% [markdown]
@@ -602,7 +602,7 @@ ax.text(0.03, 0.04, txt, transform=ax.transAxes, fontsize=7.5, va='bottom',
         family='monospace', bbox=dict(facecolor='white', edgecolor='lightgray', pad=4))
 
 label_fig(axs, 'variance_explained_dc')
-fig.savefig(FIGURES_DIR / 'variance_explained_dc.pdf', bbox_inches='tight')
+fig.savefig(FIGURES_DIR / 'variance_explained_dc.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 plt.show()
 
 # %% [markdown]
@@ -664,7 +664,7 @@ ax.text(0.03, 0.04,
         bbox=dict(facecolor='white', edgecolor='lightgray', pad=4))
 
 label_fig(axs, 'simplified_pred')
-fig.savefig(FIGURES_DIR / 'simplified_pred.pdf', bbox_inches='tight')
+fig.savefig(FIGURES_DIR / 'simplified_pred.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 plt.show()
 
 # %% [markdown]
@@ -718,7 +718,7 @@ ax.set_ylabel('Correlation')
 ax.set_ylim(-1, 1)
 ax.set_title('Correlation of Dec Niño-3.4 / relative Niño-3.4 with DC GMST residual by month')
 ax.legend(fontsize=8)
-fig.savefig(FIGURES_DIR / 'corr_dec_n34_by_month.pdf', bbox_inches='tight')
+fig.savefig(FIGURES_DIR / 'corr_dec_n34_by_month.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 plt.show()
 
 # %% [markdown]
@@ -767,7 +767,7 @@ ax.set_ylabel('°C above 1850–1900')
 ax.set_title('Simplified model fit')
 ax.legend(fontsize=8)
 label_fig([ax], 'fit_idea2')
-fig.savefig(FIGURES_DIR / 'fit_idea2.pdf', bbox_inches='tight')
+fig.savefig(FIGURES_DIR / 'fit_idea2.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 
 plt.show()
 
@@ -793,7 +793,7 @@ ax.set_ylabel('°C above 1850–1900')
 ax.set_title('Regression fits of GMST')
 ax.legend(fontsize=8, loc='upper left')
 label_fig([ax], 'fit_all')
-fig.savefig(FIGURES_DIR / 'fit_all.pdf', bbox_inches='tight')
+fig.savefig(FIGURES_DIR / 'fit_all.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 plt.show()
 
 # %% [markdown]
@@ -1093,5 +1093,5 @@ ax.set_ylim(shared_ylim)
 ax.legend(fontsize=8)
 
 label_fig(axes, 'forecast')
-fig.savefig(FIGURES_DIR / 'forecast.pdf', bbox_inches='tight')
+fig.savefig(FIGURES_DIR / 'forecast.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 plt.show()

@@ -503,7 +503,7 @@ ax.set_ylabel('MSESS vs prior-level baseline')
 ax.set_title('(b) MSESS vs prior-level baseline')
 ax.legend(fontsize=8, loc='lower right')
 
-fig.savefig(FIGURES_DIR / 'nmme_skill_comparison.pdf', bbox_inches='tight')
+fig.savefig(FIGURES_DIR / 'nmme_skill_comparison.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 plt.show()
 print("Saved: nmme_skill_comparison.pdf")
 
@@ -583,7 +583,7 @@ for col, year_list in enumerate([PANEL_YEARS_COOL, PANEL_YEARS_WARM]):
         loc = 'lower left' if row == 2 else 'upper left'
         ax.legend(fontsize=8, loc=loc)
 
-fig.savefig(FIGURES_DIR / 'nmme_trajectory_examples.pdf', bbox_inches='tight')
+fig.savefig(FIGURES_DIR / 'nmme_trajectory_examples.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 plt.show()
 print("Saved: nmme_trajectory_examples.pdf")
 
@@ -695,7 +695,7 @@ for _imod, _model in enumerate(ds_gmt_nmme.model.values):
 
 axs5[2, 1].set_axis_off()
 axs5[2, 2].set_axis_off()
-fig5.savefig(FIGURES_DIR / 'nmme_traj_dc_pca.pdf', bbox_inches='tight')
+fig5.savefig(FIGURES_DIR / 'nmme_traj_dc_pca.pdf', bbox_inches='tight', metadata={'CreationDate': None})
 plt.show()
 print("Saved: nmme_traj_dc_pca.pdf")
 

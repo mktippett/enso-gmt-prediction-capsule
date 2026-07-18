@@ -81,8 +81,21 @@ Phases (full context: `docs/phase0_dependency_trace.md`):
       BibTeX parses (it has no `%` comments) → non-fatal error that still broke
       `latexmk`; reworded to "string-macro" in both `references.bib` and
       `extract_bib.py`. `.bbl` content is unchanged (comment is not an entry).
-- [ ] Phase 6 — clean-machine test (fresh clone + locked env), GitHub publish,
-      Zenodo-GitHub integration for a capsule DOI, optional Binder badge
+- [~] Phase 6 — publish. Clean-machine test done via **fresh clone** (temp dir,
+      `pangeo-2025` interpreter; a fresh locked-env create was deferred by user
+      choice): `make all` + `make verify` = 18/18 EXACT. The clone test exposed
+      that "make all leaves git-clean" (Phase 5) held only because the gitignored
+      `.build/*.stamp` short-circuits a rebuild on the origin machine — a genuine
+      fresh clone regenerated all 12 figure PDFs, and matplotlib stamps each with
+      the build-time `/CreationDate`, so they came back byte-modified (render
+      pixel-identical; tables text-only, unaffected). **Fix (user-approved):**
+      added `metadata={'CreationDate': None}` to all 12 `savefig` calls — a
+      deliberate metadata-only deviation from the read-only oracle (which emits
+      the timestamp). Verified: figures now byte-identical across runs (12/12),
+      no `CreationDate` field, and pixel-identical to the pre-change oracle-matching
+      references (18/18 EXACT). `make all` on a clean clone is now truly byte-clean.
+      Remaining: GitHub publish (public, `enso-gmt-prediction-capsule`), Binder
+      badge (added to README), Zenodo-GitHub capsule DOI (needs user's Zenodo UI).
 
 ## Source locations (oracle, read-only)
 
