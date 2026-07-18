@@ -35,3 +35,36 @@ figures/     the manuscript's 12 figures            tables/     the 6 LaTeX tabl
 manuscript/  LaTeX source + trimmed bibliography    notebooks/  executed walkthroughs (built)
 docs/        dependency trace, build notes
 ```
+
+## Reproduction and verification
+
+Outputs are verified against the source-project reference copies: tables must
+`diff` character-identical, figures must render (`pdftoppm`) and pixel-compare
+clean. These gates are exact on the machine and environment that generated the
+reference artifacts; on other hardware or BLAS/LAPACK builds, **visual identity**
+is the standard.
+
+### Known limitation — `regression_table_full.tex` (float32 SVD, sub-leading modes)
+
+The archive stores the observed Niño-3.4 and GMST series as **float32** (matching
+the source project's in-memory dtype — the two are bit-identical). The PCA
+therefore runs in float32. The 4-PC benchmark table `regression_table_full.tex`
+uses the low-variance **GMST-PC2** mode, whose singular-value gap is small
+(s₂→s₃ ≈ 0.12; variance 3.1 % → 1.3 %). A float32 singular vector on such a gap
+is sensitive at the ~10⁻³ level to the exact LAPACK/BLAS implementation, so two
+cells of this table can differ by one unit in the last printed digit across
+environments (e.g. a coefficient of `-0.11899` rounding to `-0.119` vs `-0.118`,
+and its adjusted R²). This is a numerical-library artifact, **not** a data or
+porting difference:
+
+- the archived inputs are bit-identical (max |diff| = 0) to the source raw data;
+- the other three regression tables and all figures that depend only on the
+  dominant leading modes reproduce exactly;
+- only PC2-derived quantities move (this table, plus sub-2 % pixel shifts in the
+  PC2 curves and correlation-value annotations of `eofs_pcs.pdf`,
+  `reconstruction_2pc.pdf`, `simplified_pred.pdf`, and `pc_correlations.pdf`).
+
+The port deliberately keeps the float32 SVD to match the source code exactly;
+casting to float64 would improve conditioning but diverge from the reference.
+This table is accepted under the visual-identity standard.
+```
