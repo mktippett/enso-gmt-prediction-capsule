@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: >-
+  If you use this reproduction capsule, please cite the manuscript it
+  accompanies and the archived dataset it builds from (see below).
+title: >-
+  Reproduction capsule: ENSO-conditioned evolution of global mean
+  surface temperature
+type: software
+authors:
+  - family-names: Tippett
+    given-names: Michael K.
+    affiliation: >-
+      Department of Applied Physics and Applied Mathematics,
+      Columbia University, New York, NY, USA
+  - family-names: Becker
+    given-names: Emily J.
+    affiliation: >-
+      Rosenstiel School of Marine, Atmospheric, and Earth Science,
+      University of Miami, Miami, FL, USA
+repository-code: "https://github.com/mktippett/enso-gmt-prediction-capsule"
+url: "https://eartharxiv.org/repository/view/13005/"
+abstract: >-
+  Code and frozen input data to reproduce every figure and table of the
+  manuscript "ENSO-conditioned evolution of global mean surface
+  temperature." A single `make all` regenerates all 12 figures and 6
+  tables from the archived data alone.
+keywords:
+  - ENSO
+  - global mean surface temperature
+  - seasonal prediction
+  - reproducibility
+  - NMME
+preferred-citation:
+  type: article
+  title: "ENSO-conditioned evolution of global mean surface temperature"
+  authors:
+    - family-names: Tippett
+      given-names: Michael K.
+    - family-names: Becker
+      given-names: Emily J.
+  year: 2026
+  url: "https://eartharxiv.org/repository/view/13005/"

@@ -1,0 +1,33 @@
+{
+  "title": "Reproduction capsule: ENSO-conditioned evolution of global mean surface temperature",
+  "upload_type": "software",
+  "description": "Code and frozen input data to reproduce every figure and table of the manuscript \"ENSO-conditioned evolution of global mean surface temperature.\" A single `make all` regenerates all 12 figures and 6 tables from the archived data alone; `make verify` checks them against the committed reference outputs.",
+  "creators": [
+    {
+      "name": "Tippett, Michael K.",
+      "affiliation": "Department of Applied Physics and Applied Mathematics, Columbia University, New York, NY, USA"
+    },
+    {
+      "name": "Becker, Emily J.",
+      "affiliation": "Rosenstiel School of Marine, Atmospheric, and Earth Science, University of Miami, Miami, FL, USA"
+    }
+  ],
+  "keywords": [
+    "ENSO",
+    "global mean surface temperature",
+    "seasonal prediction",
+    "reproducibility",
+    "NMME"
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "https://eartharxiv.org/repository/view/13005/"
+    },
+    {
+      "relation": "references",
+      "identifier": "10.5281/zenodo.20514350",
+      "resource_type": "dataset"
+    }
+  ]
+}
