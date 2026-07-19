@@ -3,8 +3,8 @@
 
 GitHub renders ``.ipynb`` with embedded outputs, so a reader can see the code
 and every figure without cloning or running anything. These notebooks are NOT
-part of the reproducibility contract (``make all`` / ``make verify``): the
-authoritative source is ``scripts/*.py``.
+what ``make all`` / ``make verify`` regenerate: the authoritative source is
+``scripts/*.py``.
 
 Usage:
     python scripts/build_notebooks.py <script.py> <out.ipynb>
@@ -28,7 +28,7 @@ BANNER = (
     "This notebook is generated from `{script}` with every figure rendered "
     "inline, viewable on GitHub without cloning or running anything.\n"
     "\n"
-    "It is **not** part of the reproducibility contract. The authoritative "
+    "It is **not** what `make all` regenerates. The authoritative "
     "source is the script under `scripts/`; regenerate the manuscript figures "
     "and tables with `make all`. Outputs here may carry machine-specific "
     "last-digit differences (the float32-SVD caveat documented in the README)."

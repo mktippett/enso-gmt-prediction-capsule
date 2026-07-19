@@ -25,11 +25,7 @@
 # | `regression_table_full.tex`, `regression_table_r1.tex` | table |
 # | `regression_table_dc2.tex`, `regression_table_dc2_roni.tex` | table |
 #
-# Figures are written to `figures/`, tables to `tables/`. Exploratory diagnostics,
-# SST correlation maps (cartopy), the PMM/E-C sections, and the intermediate model
-# figures are cut; the few intermediates that live inside cut blocks but feed kept
-# outputs (`time_fit`, `beta_dec_n34`, `pc_level`, the ENSO-response betas,
-# `gmt_fit_2c`, the shared y-limit block) are retained.
+# Figures are written to `figures/`, tables to `tables/`.
 
 # %%
 import os

@@ -2,7 +2,7 @@
 # temperature". `make all` regenerates every figure and table used by the
 # manuscript from the frozen data in data/ alone.
 #
-#   make all         figures + tables (the reproduction contract)
+#   make all         figures + tables
 #   make figures     the 12 figures  -> figures/
 #   make tables      the 6 LaTeX tables -> tables/
 #   make manuscript  compile manuscript/manuscript.pdf (needs figures + tables)
@@ -47,8 +47,8 @@ manuscript: figures tables
 
 # Committed notebooks with figures rendered inline (retina), so the code +
 # outputs are viewable on GitHub without cloning. Deliberately NOT a dependency
-# of `all` or `verify` — a viewing convenience, not part of the reproduction
-# contract (see scripts/build_notebooks.py).
+# of `all` or `verify` — a viewing convenience, not something `make all`
+# regenerates (see scripts/build_notebooks.py).
 notebooks: notebooks/global_temperature_enso-prediction.ipynb notebooks/nmme_comparison.ipynb
 
 notebooks/%.ipynb: scripts/%.py scripts/build_notebooks.py

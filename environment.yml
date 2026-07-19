@@ -1,7 +1,6 @@
-# Locked environment for the reproduction capsule, pruned from the source
-# project's `pangeo-2025` environment to only what the ported scripts, the
-# notebook build, and `make verify` require. Versions are pinned to those used
-# to generate the committed reference outputs.
+# Locked environment for the reproduction capsule: the analysis stack, the
+# notebook build, and `make verify`. Versions are pinned to those used to
+# generate the committed reference outputs.
 #
 #   conda env create -f environment.yml   # or:  mamba env create -f environment.yml
 #   conda activate enso-gmt-capsule

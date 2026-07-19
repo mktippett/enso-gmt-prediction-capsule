@@ -29,10 +29,7 @@
 #   2. Simplified model + NMME forecast Dec N34   (Gap 1: realistic input)
 #   3. NMME GCM multi-model mean GMT forecast      (Gap 2: full GCM baseline)
 #
-# All three are verified against the same observed GMST trajectories. The
-# exploratory scatter/trend/LOO figures and the two `nmme_traj_pca*` figures are
-# cut; the intermediates they share with kept outputs (`_gmt_p`, `_n34_p`,
-# `_June_p`, `_June_p_n34`, `_June_p_n34obs`) are retained.
+# All three are verified against the same observed GMST trajectories.
 
 # %%
 import os

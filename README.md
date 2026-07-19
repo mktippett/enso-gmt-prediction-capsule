@@ -1,20 +1,12 @@
-# Reproduction capsule — ENSO-conditioned evolution of global mean surface temperature
+# ENSO-conditioned evolution of global mean surface temperature
 
 Everything needed — and nothing more — to reproduce the figures and tables of:
 
-> Tippett, M. K.: *ENSO-conditioned evolution of global mean surface
-> temperature.* Preprint: <https://eartharxiv.org/repository/view/13005/>
+> Tippett, M. K. and Becker, E. J.: *ENSO-conditioned evolution of global mean
+> surface temperature.* Preprint: <https://eartharxiv.org/repository/view/13005/>
 
-**Contract:** `make all` regenerates all 12 figures and 6 tables used by the
-manuscript from the frozen data in `data/` alone.
-
-This repository follows a general **reproduction capsule** pattern: trace a
-manuscript's cited figures/tables back to the code that produces them, port
-the minimal code and frozen data into a standalone repo, verify byte/pixel
-identity against the original analysis, then publish. That workflow — the
-dependency trace, the verification gates, the privacy cleanup discipline —
-has since been generalized into a reusable method for producing capsules like
-this one from other manuscripts.
+**What `make all` regenerates:** all 12 figures and 6 tables used by the
+manuscript, from the frozen data in `data/` alone.
 
 ## Browse the code and figures (no clone required)
 
@@ -24,7 +16,7 @@ straight on GitHub:
 - [`notebooks/global_temperature_enso-prediction.ipynb`](notebooks/global_temperature_enso-prediction.ipynb)
 - [`notebooks/nmme_comparison.ipynb`](notebooks/nmme_comparison.ipynb)
 
-These are a viewing convenience, **not** part of the reproduction contract:
+These are a viewing convenience, **not** something `make all` regenerates:
 the authoritative source is `scripts/*.py`, and `make all` is what regenerates
 the manuscript outputs. Refresh them with `make notebooks` (see
 `scripts/build_notebooks.py`).
@@ -46,12 +38,10 @@ Make targets: `all` (figures + tables), `figures`, `tables`, `manuscript`,
 
 ## Environment
 
-`environment.yml` is a version-pinned, pruned subset of the `pangeo-2025`
-environment — the analysis stack (numpy, pandas, xarray, scipy,
-statsmodels, netCDF4, matplotlib), the jupytext/nbconvert notebook build, and
-`poppler` (for the `pdftoppm` figure comparison in `make verify`). No cartopy or
-gridded fields are needed: the SST-map and PMM sections of the original scripts
-are not part of the manuscript and are cut.
+`environment.yml` is a version-pinned environment covering the analysis stack
+(numpy, pandas, xarray, scipy, statsmodels, netCDF4, matplotlib), the
+jupytext/nbconvert notebook build, and `poppler` (for the `pdftoppm` figure
+comparison in `make verify`). No cartopy or gridded fields are required.
 
 ## Repository layout
 
@@ -133,15 +123,16 @@ environments (e.g. a coefficient of `-0.11899` rounding to `-0.119` vs `-0.118`,
 and its adjusted R²). This is a numerical-library artifact, **not** a data or
 porting difference:
 
-- the archived inputs are bit-identical (max |diff| = 0) to the source raw data;
+- the archived float32 inputs are exact representations of the underlying data
+  (max |diff| = 0);
 - the other three regression tables and all figures that depend only on the
   dominant leading modes reproduce exactly;
 - only PC2-derived quantities move (this table, plus sub-2 % pixel shifts in the
   PC2 curves and correlation-value annotations of `eofs_pcs.pdf`,
   `reconstruction_2pc.pdf`, `simplified_pred.pdf`, and `pc_correlations.pdf`).
 
-The port deliberately keeps the float32 SVD to match the source code exactly;
-casting to float64 would improve conditioning but diverge from the reference.
+The analysis deliberately keeps the float32 SVD (its native in-memory dtype);
+casting to float64 would improve conditioning but change the results.
 `make verify` treats this table under the visual-identity standard (reported as
 `WARN`, not `FAIL`, if it moves).
 
