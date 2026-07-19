@@ -13,4 +13,8 @@ __pycache__/
 # build intermediates
 .build/
 .verify/
-notebooks/*.ipynb
+
+# internal build/provenance material — kept locally, not published
+/CLAUDE.md
+/docs/
+/data/make_zenodo_archive.py

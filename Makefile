@@ -6,10 +6,9 @@
 #   make figures     the 12 figures  -> figures/
 #   make tables      the 6 LaTeX tables -> tables/
 #   make manuscript  compile manuscript/manuscript.pdf (needs figures + tables)
-#   make notebooks   executed jupytext notebooks -> notebooks/*.ipynb
-#   make browse      committed browse notebooks (figures inline) -> docs/browse/
+#   make notebooks   committed inline-figure notebooks -> notebooks/*.ipynb
 #   make verify      rebuild into .verify/ and compare against committed outputs
-#   make clean       remove build intermediates (keeps committed figures/tables)
+#   make clean       remove build intermediates (keeps all committed outputs)
 #
 # Run inside the locked environment (see environment.yml):
 #   conda env create -f environment.yml && conda activate enso-gmt-capsule
@@ -24,7 +23,7 @@ STAMP_DIR   := .build
 MAIN_STAMP  := $(STAMP_DIR)/main.stamp
 NMME_STAMP  := $(STAMP_DIR)/nmme.stamp
 
-.PHONY: all figures tables manuscript notebooks browse verify clean help
+.PHONY: all figures tables manuscript notebooks verify clean help
 
 all: figures tables
 
@@ -46,21 +45,15 @@ figures tables: $(MAIN_STAMP) $(NMME_STAMP)
 manuscript: figures tables
 	cd manuscript && latexmk -pdf -interaction=nonstopmode manuscript.tex
 
+# Committed notebooks with figures rendered inline (retina), so the code +
+# outputs are viewable on GitHub without cloning. Deliberately NOT a dependency
+# of `all` or `verify` — a viewing convenience, not part of the reproduction
+# contract (see scripts/build_notebooks.py).
 notebooks: notebooks/global_temperature_enso-prediction.ipynb notebooks/nmme_comparison.ipynb
 
-notebooks/%.ipynb: scripts/%.py
+notebooks/%.ipynb: scripts/%.py scripts/build_notebooks.py
 	@mkdir -p notebooks
-	$(PYTHON) -m jupytext --to notebook --execute --output $@ $<
-
-# Browse-only notebooks with figures rendered inline, committed under
-# docs/browse/ so the code + outputs are viewable on GitHub without cloning.
-# Deliberately NOT a dependency of `all` or `verify` — these are a browsing
-# convenience, not part of the reproduction contract (see scripts/build_browse.py).
-browse: docs/browse/global_temperature_enso-prediction.ipynb docs/browse/nmme_comparison.ipynb
-
-docs/browse/%.ipynb: scripts/%.py scripts/build_browse.py
-	@mkdir -p docs/browse
-	$(PYTHON) scripts/build_browse.py $< $@
+	$(PYTHON) scripts/build_notebooks.py $< $@
 
 # Build fresh outputs into a scratch tree and diff against the committed
 # figures/ and tables/ (tables: character-identical; figures: pixel compare).
@@ -71,5 +64,5 @@ verify:
 	$(PYTHON) scripts/verify.py .verify
 
 clean:
-	rm -rf $(STAMP_DIR) .verify notebooks/*.ipynb
+	rm -rf $(STAMP_DIR) .verify
 	-cd manuscript && latexmk -C manuscript.tex >/dev/null 2>&1

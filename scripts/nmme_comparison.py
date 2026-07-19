@@ -14,9 +14,8 @@
 # %% [markdown]
 # # NMME comparison — three GMST forecast systems
 #
-# Reproduction-capsule port of `nmme_comparison.py`, trimmed to the manuscript's
-# **3 figures + 2 tables** (per `docs/phase0_dependency_trace.md`) and retargeted
-# to the frozen `data/` archive:
+# Analysis producing the manuscript's **3 figures + 2 tables**, reading only the
+# frozen `data/` archive:
 #
 # | Output | kind |
 # |---|---|
@@ -591,9 +590,9 @@ print("Saved: nmme_trajectory_examples.pdf")
 # ## Common-period NMME views (shared by the DC-PCA figure and trends table)
 #
 # `_gmt_p`/`_n34_p` slice the NMME archive to the common period and `_June_p`/
-# `_June_p_n34` select the June starts. These live inside the cut standard
-# trajectory-PCA figure in the oracle but are trim-trap intermediates for the
-# double-centered PCA figure and the trends table below.
+# `_June_p_n34` select the June starts. These belong to a cut standard
+# trajectory-PCA figure but are needed intermediates for the double-centered
+# PCA figure and the trends table below.
 
 # %%
 _gmt_p = ds_gmt_nmme.sel(S=slice(str(COMMON_YEARS[0]), str(COMMON_YEARS[-1])))
@@ -788,7 +787,7 @@ _tex_lines = [
 
 _tex_path = TABLES_DIR / 'nmme_trends_table.tex'
 _tex_path.write_text('\n'.join(_tex_lines) + '\n')
-print(f"Saved: {_tex_path}")
+print(f"Saved: {_tex_path.name}")
 
 # %% [markdown]
 # ## Table — `nmme_significance_table.tex`: per-month pairwise significance
@@ -833,7 +832,7 @@ _sig_tex = [
 
 _sig_path = TABLES_DIR / 'nmme_significance_table.tex'
 _sig_path.write_text('\n'.join(_sig_tex) + '\n')
-print(f"Saved: {_sig_path}")
+print(f"Saved: {_sig_path.name}")
 
 
-print("\nDone. All plots saved to", FIGURES_DIR)
+print("\nDone. All plots saved to", FIGURES_DIR.name)

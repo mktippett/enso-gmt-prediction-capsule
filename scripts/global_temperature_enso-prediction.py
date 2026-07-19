@@ -14,11 +14,8 @@
 # %% [markdown]
 # # ENSO-conditioned evolution of global mean surface temperature
 #
-# Reproduction-capsule port of the analysis script that produces **9 figures and
-# 4 tables** used by the manuscript. It is the oracle script
-# `scripts/global_temperature_enso-prediction.py` from the source project, trimmed
-# to the manuscript-mapped outputs (per `docs/phase0_dependency_trace.md`) and
-# retargeted to read only the frozen Zenodo v2 data in `data/`:
+# Analysis producing **9 figures and 4 tables** used by the manuscript,
+# reading only the frozen Zenodo v2 data in `data/`:
 #
 # | Output | kind |
 # |---|---|
@@ -608,8 +605,8 @@ plt.show()
 # %% [markdown]
 # ## Shared DC diagnostics for `simplified_pred.pdf` and `corr_dec_n34_by_month.pdf`
 #
-# These intermediates live inside the cut `eofs_pcs_dc` figure block in the oracle
-# but feed kept outputs: `beta_dec_n34` (regression of the DC residual on
+# These intermediates live inside the cut `eofs_pcs_dc` figure block but feed
+# kept outputs: `beta_dec_n34` (regression of the DC residual on
 # standardized December Niño-3.4) feeds `corr_dec_n34_by_month.pdf`; `pc_level`,
 # `r_level_pc1`, and `r_dcpc1_pc2` feed `simplified_pred.pdf`.
 

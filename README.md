@@ -10,15 +10,16 @@ manuscript from the frozen data in `data/` alone.
 
 ## Browse the code and figures (no clone required)
 
-Rendered notebooks with every figure inline, viewable straight on GitHub:
+Executed notebooks with every figure inline (retina resolution), viewable
+straight on GitHub:
 
-- [`docs/browse/global_temperature_enso-prediction.ipynb`](docs/browse/global_temperature_enso-prediction.ipynb)
-- [`docs/browse/nmme_comparison.ipynb`](docs/browse/nmme_comparison.ipynb)
+- [`notebooks/global_temperature_enso-prediction.ipynb`](notebooks/global_temperature_enso-prediction.ipynb)
+- [`notebooks/nmme_comparison.ipynb`](notebooks/nmme_comparison.ipynb)
 
-These are a browsing convenience, **not** part of the reproduction contract:
+These are a viewing convenience, **not** part of the reproduction contract:
 the authoritative source is `scripts/*.py`, and `make all` is what regenerates
-the manuscript outputs. Refresh them with `make browse` (see
-`scripts/build_browse.py`).
+the manuscript outputs. Refresh them with `make notebooks` (see
+`scripts/build_notebooks.py`).
 
 ## Quick start
 
@@ -32,14 +33,13 @@ make verify       # rebuild and check against the committed reference outputs
 ```
 
 Make targets: `all` (figures + tables), `figures`, `tables`, `manuscript`,
-`notebooks` (executed jupytext walkthroughs), `browse` (committed inline-figure
-notebooks under `docs/browse/`), `verify`, `clean`. Set `PYTHON=...` to point at
-a specific interpreter.
+`notebooks` (committed inline-figure notebooks under `notebooks/`), `verify`,
+`clean`. Set `PYTHON=...` to point at a specific interpreter.
 
 ## Environment
 
-`environment.yml` is a version-pinned, pruned subset of the source project's
-`pangeo-2025` environment — the analysis stack (numpy, pandas, xarray, scipy,
+`environment.yml` is a version-pinned, pruned subset of the `pangeo-2025`
+environment — the analysis stack (numpy, pandas, xarray, scipy,
 statsmodels, netCDF4, matplotlib), the jupytext/nbconvert notebook build, and
 `poppler` (for the `pdftoppm` figure comparison in `make verify`). No cartopy or
 gridded fields are needed: the SST-map and PMM sections of the original scripts
@@ -53,15 +53,14 @@ scripts/      analysis in jupytext percent format + verify.py
 figures/      the manuscript's 12 figures    (committed reference outputs)
 tables/       the manuscript's 6 LaTeX tables (committed reference outputs)
 manuscript/   self-contained LaTeX source + cited-only bibliography
-notebooks/    executed walkthroughs (built by `make notebooks`; not committed)
-docs/         dependency trace and build notes
+notebooks/    executed notebooks, figures inline (built by `make notebooks`,
+              generated from scripts/, never hand-edited; committed for browsing)
 environment.yml  Makefile
 ```
 
 ## Reproduction map
 
-Two scripts produce every output; each writes both figures and tables. Full
-line-by-line provenance is in `docs/phase0_dependency_trace.md`.
+Two scripts produce every output; each writes both figures and tables.
 
 ### `scripts/global_temperature_enso-prediction.py` — 9 figures, 4 tables
 
@@ -93,8 +92,8 @@ line-by-line provenance is in `docs/phase0_dependency_trace.md`.
 
 The scripts are jupytext percent-format `.py` files (cells + markdown
 narration). `make notebooks` renders and executes them into
-`notebooks/*.ipynb`; the `.ipynb` files are build products and are never
-hand-edited.
+`notebooks/*.ipynb` with figures inline; the `.ipynb` files are build products
+and are never hand-edited.
 
 ## Verification
 
@@ -115,8 +114,8 @@ leaves a clean `git status` on any machine that reproduces the pixels exactly.
 
 ### Known limitation — `regression_table_full.tex` (float32 SVD, sub-leading modes)
 
-The archive stores the observed Niño-3.4 and GMST series as **float32** (matching
-the source project's in-memory dtype — the two are bit-identical). The PCA
+The archive stores the observed Niño-3.4 and GMST series as **float32** (the
+analysis's native in-memory dtype — the two are bit-identical). The PCA
 therefore runs in float32. The 4-PC benchmark table `regression_table_full.tex`
 uses the low-variance **GMST-PC2** mode, whose singular-value gap is small
 (s₂→s₃ ≈ 0.12; variance 3.1 % → 1.3 %). A float32 singular vector on such a gap
@@ -152,6 +151,4 @@ concept DOI [10.5281/zenodo.20514350](https://doi.org/10.5281/zenodo.20514350)):
 - `Rnino34.ascii.txt` — NOAA CPC relative Niño-3.4 (RONI) index
   ([source](https://www.cpc.ncep.noaa.gov/data/indices/Rnino34.ascii.txt),
   retrieved 2026-04-03)
-- `make_zenodo_archive.py` — provenance: how the netCDFs were derived from
-  ERSSTv5, NOAA GlobalTemp v6.1.0, and NMME (not runnable without those sources)
 - `SHA256SUMS` — checksums; run `sha256sum -c data/SHA256SUMS` to check integrity
