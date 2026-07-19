@@ -94,8 +94,21 @@ Phases (full context: `docs/phase0_dependency_trace.md`):
       the timestamp). Verified: figures now byte-identical across runs (12/12),
       no `CreationDate` field, and pixel-identical to the pre-change oracle-matching
       references (18/18 EXACT). `make all` on a clean clone is now truly byte-clean.
-      Remaining: GitHub publish (public, `enso-gmt-prediction-capsule`), Binder
-      badge (added to README), Zenodo-GitHub capsule DOI (needs user's Zenodo UI).
+      **Published:** public GitHub repo `mktippett/enso-gmt-prediction-capsule`
+      (topics set); Binder badge + "Run in the browser" section in README (builds
+      from `environment.yml`); `CITATION.cff` + `.zenodo.json` added (both paper
+      authors as creators; record linked to the preprint and dataset concept DOI
+      `10.5281/zenodo.20514350`).
+      **TODO — deferred by user (2026-07-18), do later:**
+        1. **License** — no `LICENSE`/`.zenodo.json` license field yet (repo is
+           all-rights-reserved by default). Add when a choice is made; trivially
+           reversible even after a DOI exists.
+        2. **Zenodo capsule DOI** — GitHub↔Zenodo webhook NOT yet enabled. To
+           finish: log into zenodo.org via "Log in with GitHub", toggle the repo
+           ON at zenodo.org/account/settings/github/, THEN cut a `v1.0.0` GitHub
+           release (webhook only archives releases created after it is enabled) →
+           Zenodo mints concept + version DOIs → add the concept-DOI badge to
+           README. Release notes not yet drafted.
 
 ## Source locations (oracle, read-only)
 
