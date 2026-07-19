@@ -81,7 +81,8 @@ Phases (full context: `docs/phase0_dependency_trace.md`):
       BibTeX parses (it has no `%` comments) → non-fatal error that still broke
       `latexmk`; reworded to "string-macro" in both `references.bib` and
       `extract_bib.py`. `.bbl` content is unchanged (comment is not an entry).
-- [~] Phase 6 — publish. Clean-machine test done via **fresh clone** (temp dir,
+- [x] Phase 6 — publish (**done**; the two items below are permanently optional,
+      not blockers). Clean-machine test done via **fresh clone** (temp dir,
       `pangeo-2025` interpreter; a fresh locked-env create was deferred by user
       choice): `make all` + `make verify` = 18/18 EXACT. The clone test exposed
       that "make all leaves git-clean" (Phase 5) held only because the gitignored
@@ -99,16 +100,16 @@ Phases (full context: `docs/phase0_dependency_trace.md`):
       from `environment.yml`); `CITATION.cff` + `.zenodo.json` added (both paper
       authors as creators; record linked to the preprint and dataset concept DOI
       `10.5281/zenodo.20514350`).
-      **TODO — deferred by user (2026-07-18), do later:**
-        1. **License** — no `LICENSE`/`.zenodo.json` license field yet (repo is
-           all-rights-reserved by default). Add when a choice is made; trivially
-           reversible even after a DOI exists.
-        2. **Zenodo capsule DOI** — GitHub↔Zenodo webhook NOT yet enabled. To
-           finish: log into zenodo.org via "Log in with GitHub", toggle the repo
-           ON at zenodo.org/account/settings/github/, THEN cut a `v1.0.0` GitHub
-           release (webhook only archives releases created after it is enabled) →
-           Zenodo mints concept + version DOIs → add the concept-DOI badge to
-           README. Release notes not yet drafted.
+      **Permanently optional (deferred by user 2026-07-18 — capsule is complete
+      without these; pick up only if desired):**
+        1. **License** — no `LICENSE`/`.zenodo.json` license field (repo is
+           all-rights-reserved by default). Add if/when a choice is made;
+           trivially reversible even after a DOI exists.
+        2. **Zenodo capsule DOI** — GitHub↔Zenodo webhook not enabled. If pursued:
+           log into zenodo.org via "Log in with GitHub", toggle the repo ON at
+           zenodo.org/account/settings/github/, THEN cut a `v1.0.0` GitHub release
+           (webhook only archives releases created after it is enabled) → Zenodo
+           mints concept + version DOIs → add the concept-DOI badge to README.
 
 ## Source locations (oracle, read-only)
 
