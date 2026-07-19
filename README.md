@@ -8,6 +8,14 @@ Everything needed — and nothing more — to reproduce the figures and tables o
 **Contract:** `make all` regenerates all 12 figures and 6 tables used by the
 manuscript from the frozen data in `data/` alone.
 
+This repository follows a general **reproduction capsule** pattern: trace a
+manuscript's cited figures/tables back to the code that produces them, port
+the minimal code and frozen data into a standalone repo, verify byte/pixel
+identity against the original analysis, then publish. That workflow — the
+dependency trace, the verification gates, the privacy cleanup discipline —
+has since been generalized into a reusable method for producing capsules like
+this one from other manuscripts.
+
 ## Browse the code and figures (no clone required)
 
 Executed notebooks with every figure inline (retina resolution), viewable
