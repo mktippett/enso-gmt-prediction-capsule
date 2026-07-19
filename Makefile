@@ -7,6 +7,7 @@
 #   make tables      the 6 LaTeX tables -> tables/
 #   make manuscript  compile manuscript/manuscript.pdf (needs figures + tables)
 #   make notebooks   executed jupytext notebooks -> notebooks/*.ipynb
+#   make browse      committed browse notebooks (figures inline) -> docs/browse/
 #   make verify      rebuild into .verify/ and compare against committed outputs
 #   make clean       remove build intermediates (keeps committed figures/tables)
 #
@@ -23,7 +24,7 @@ STAMP_DIR   := .build
 MAIN_STAMP  := $(STAMP_DIR)/main.stamp
 NMME_STAMP  := $(STAMP_DIR)/nmme.stamp
 
-.PHONY: all figures tables manuscript notebooks verify clean help
+.PHONY: all figures tables manuscript notebooks browse verify clean help
 
 all: figures tables
 
@@ -50,6 +51,16 @@ notebooks: notebooks/global_temperature_enso-prediction.ipynb notebooks/nmme_com
 notebooks/%.ipynb: scripts/%.py
 	@mkdir -p notebooks
 	$(PYTHON) -m jupytext --to notebook --execute --output $@ $<
+
+# Browse-only notebooks with figures rendered inline, committed under
+# docs/browse/ so the code + outputs are viewable on GitHub without cloning.
+# Deliberately NOT a dependency of `all` or `verify` — these are a browsing
+# convenience, not part of the reproduction contract (see scripts/build_browse.py).
+browse: docs/browse/global_temperature_enso-prediction.ipynb docs/browse/nmme_comparison.ipynb
+
+docs/browse/%.ipynb: scripts/%.py scripts/build_browse.py
+	@mkdir -p docs/browse
+	$(PYTHON) scripts/build_browse.py $< $@
 
 # Build fresh outputs into a scratch tree and diff against the committed
 # figures/ and tables/ (tables: character-identical; figures: pixel compare).

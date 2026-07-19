@@ -8,15 +8,17 @@ Everything needed — and nothing more — to reproduce the figures and tables o
 **Contract:** `make all` regenerates all 12 figures and 6 tables used by the
 manuscript from the frozen data in `data/` alone.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mktippett/enso-gmt-prediction-capsule/HEAD)
+## Browse the code and figures (no clone required)
 
-## Run in the browser (Binder)
+Rendered notebooks with every figure inline, viewable straight on GitHub:
 
-The badge above launches the capsule on [Binder](https://mybinder.org), which
-builds the pinned environment straight from `environment.yml` — no local install.
-Open a terminal there and run `make all` / `make verify`, or open either
-`scripts/*.py` (jupytext percent format) directly in JupyterLab, where the
-installed `jupytext` renders them as notebooks.
+- [`docs/browse/global_temperature_enso-prediction.ipynb`](docs/browse/global_temperature_enso-prediction.ipynb)
+- [`docs/browse/nmme_comparison.ipynb`](docs/browse/nmme_comparison.ipynb)
+
+These are a browsing convenience, **not** part of the reproduction contract:
+the authoritative source is `scripts/*.py`, and `make all` is what regenerates
+the manuscript outputs. Refresh them with `make browse` (see
+`scripts/build_browse.py`).
 
 ## Quick start
 
@@ -30,8 +32,9 @@ make verify       # rebuild and check against the committed reference outputs
 ```
 
 Make targets: `all` (figures + tables), `figures`, `tables`, `manuscript`,
-`notebooks` (executed jupytext walkthroughs), `verify`, `clean`. Set
-`PYTHON=...` to point at a specific interpreter.
+`notebooks` (executed jupytext walkthroughs), `browse` (committed inline-figure
+notebooks under `docs/browse/`), `verify`, `clean`. Set `PYTHON=...` to point at
+a specific interpreter.
 
 ## Environment
 

@@ -96,10 +96,26 @@ Phases (full context: `docs/phase0_dependency_trace.md`):
       no `CreationDate` field, and pixel-identical to the pre-change oracle-matching
       references (18/18 EXACT). `make all` on a clean clone is now truly byte-clean.
       **Published:** public GitHub repo `mktippett/enso-gmt-prediction-capsule`
-      (topics set); Binder badge + "Run in the browser" section in README (builds
-      from `environment.yml`); `CITATION.cff` + `.zenodo.json` added (both paper
+      (topics set); `CITATION.cff` + `.zenodo.json` added (both paper
       authors as creators; record linked to the preprint and dataset concept DOI
       `10.5281/zenodo.20514350`).
+
+- [x] Browse notebooks (post-Phase-6, 2026-07-18) — committed inline-figure
+      notebooks under `docs/browse/` so the code + all 12 figures are viewable on
+      GitHub without cloning (Option C: a browsing convenience, deliberately NOT
+      in the reproduction contract or `make verify`). `scripts/build_browse.py`
+      reads each `scripts/*.py` **unmodified**, prepends a markdown banner + a
+      shim cell (`%matplotlib inline` + a no-op override of `matplotlib.use` to
+      neutralize the scripts' `Agg` switch), executes via nbclient, then
+      `normalize()`s away the three nondeterminism sources (random cell ids →
+      `cell-{i}`; drops `metadata.execution` timing; coalesces same-stream
+      outputs) so a rebuild is **byte-identical** (verified both notebooks).
+      Safe to commit / refresh without churn because the scripts are
+      deterministic: main script has no RNG; `nmme_comparison`'s only stochastic
+      step (`block_bootstrap_trend_decade`) hard-codes `seed=42`. `make browse`
+      target (not a dep of `all`); README "Browse the code and figures" section.
+      Distinct from `make notebooks` (gitignored `notebooks/*.ipynb`, Agg, no
+      inline output — the plain executed walkthroughs).
       **Permanently optional (deferred by user 2026-07-18 — capsule is complete
       without these; pick up only if desired):**
         1. **License** — no `LICENSE`/`.zenodo.json` license field (repo is
@@ -110,6 +126,16 @@ Phases (full context: `docs/phase0_dependency_trace.md`):
            zenodo.org/account/settings/github/, THEN cut a `v1.0.0` GitHub release
            (webhook only archives releases created after it is enabled) → Zenodo
            mints concept + version DOIs → add the concept-DOI badge to README.
+        3. **Binder** — badge + "Run in the browser" section were removed
+           2026-07-18: the mybinder.org build fails resolving `environment.yml`
+           (libmamba "Cannot find a valid extracted directory cache for
+           `zipp-3.23.0`" / "Package cache error" during `mamba env update` —
+           a package-cache/link failure in the Binder image build, not a bad
+           pin per se). The committed `docs/browse/` notebooks now cover the
+           "see it without installing" use case. If Binder is revisited, the
+           lead is the mamba cache-link step in the Binder Dockerfile; try
+           loosening the `zipp` pin or a `pip`-based `requirements.txt`/
+           `postBuild` instead of the full conda solve.
 
 ## Source locations (oracle, read-only)
 
