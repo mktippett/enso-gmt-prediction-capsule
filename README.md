@@ -8,6 +8,23 @@ Everything needed — and nothing more — to reproduce the figures and tables o
 **What `make all` regenerates:** all 12 figures and 6 tables used by the
 manuscript, from the frozen data in `data/` alone.
 
+## Headline forecast: February 2027 GMST (unverified — the date hasn't happened yet)
+
+The paper's central forward-looking result, shown together in
+`figures/forecast.pdf` (manuscript Fig. 3e):
+
+- **NMME multi-model forecast** (June 2026 initialization): global mean
+  surface temperature peaks in **February 2027 at about 1.84°C** above the
+  1850–1900 baseline.
+- **This paper's ENSO-conditioned model**, using only the observed recent
+  12-month GMST level (+1.30°C, June 2025–May 2026) and the NMME-forecast
+  December 2026 Niño-3.4 value (+3.3°C) as inputs: **February 2027 peak of
+  about 1.68°C**, 95% prediction interval +1.42°C to +1.94°C.
+
+Both numbers are genuine predictions of a date that has not yet occurred —
+rerunning this capsule once observations catch up to February 2027 will show
+how they verified.
+
 ## Browse the code and figures (no clone required)
 
 Executed notebooks with every figure inline (retina resolution), viewable
