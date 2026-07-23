@@ -8,22 +8,18 @@ Everything needed — and nothing more — to reproduce the figures and tables o
 **What `make all` regenerates:** all 12 figures and 6 tables used by the
 manuscript, from the frozen data in `data/` alone.
 
-## Headline forecast: February 2027 GMST (unverified — the date hasn't happened yet)
+## Headline forecast: Feb 2027 GMST peak (unverified)
 
-The paper's central forward-looking result, shown together in
-`figures/forecast.pdf` (manuscript Fig. 3e):
+Forecast June 2026–May 2027, °C above 1850–1900 (`figures/forecast.pdf`,
+manuscript Fig. 3e): the NMME multi-model forecast and this paper's
+ENSO-conditioned model both peak in **February 2027**, at **1.84°C** and
+**1.68°C** respectively — genuine predictions of a date that hasn't happened
+yet.
 
-- **NMME multi-model forecast** (June 2026 initialization): global mean
-  surface temperature peaks in **February 2027 at about 1.84°C** above the
-  1850–1900 baseline.
-- **This paper's ENSO-conditioned model**, using only the observed recent
-  12-month GMST level (+1.30°C, June 2025–May 2026) and the NMME-forecast
-  December 2026 Niño-3.4 value (+3.3°C) as inputs: **February 2027 peak of
-  about 1.68°C**, 95% prediction interval +1.42°C to +1.94°C.
-
-Both numbers are genuine predictions of a date that has not yet occurred —
-rerunning this capsule once observations catch up to February 2027 will show
-how they verified.
+| | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan | **Feb** | Mar | Apr | May |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| NMME | 1.45 | 1.55 | 1.62 | 1.64 | 1.67 | 1.71 | 1.78 | 1.82 | **1.84** | 1.71 | 1.62 | 1.61 |
+| Simplified model | 1.41 | 1.40 | 1.40 | 1.45 | 1.48 | 1.47 | 1.55 | 1.66 | **1.68** | 1.65 | 1.61 | 1.57 |
 
 ## Browse the code and figures (no clone required)
 
