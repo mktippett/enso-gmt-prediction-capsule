@@ -2,8 +2,9 @@
 
 Everything needed — and nothing more — to reproduce the figures and tables of:
 
-> Tippett, M. K. and Becker, E. J.: *ENSO-conditioned evolution of global mean
-> surface temperature.* Preprint: <https://eartharxiv.org/repository/view/13005/>
+> Tippett, M. K., & Becker, E. J. (2026). ENSO-conditioned evolution of global
+> mean surface temperature. *Geophysical Research Letters*, 53, e2026GL124175.
+> <https://doi.org/10.1029/2026GL124175>
 
 **What `make all` regenerates:** all 12 figures and 6 tables used by the
 manuscript, from the frozen data in `data/` alone.
