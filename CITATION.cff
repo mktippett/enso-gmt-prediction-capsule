@@ -18,7 +18,7 @@ authors:
       Rosenstiel School of Marine, Atmospheric, and Earth Science,
       University of Miami, Miami, FL, USA
 repository-code: "https://github.com/mktippett/enso-gmt-prediction-capsule"
-url: "https://eartharxiv.org/repository/view/13005/"
+url: "https://doi.org/10.1029/2026GL124175"
 abstract: >-
   Code and frozen input data to reproduce every figure and table of the
   manuscript "ENSO-conditioned evolution of global mean surface
@@ -39,4 +39,9 @@ preferred-citation:
     - family-names: Becker
       given-names: Emily J.
   year: 2026
-  url: "https://eartharxiv.org/repository/view/13005/"
+  journal: "Geophysical Research Letters"
+  volume: 53
+  identifiers:
+    - type: doi
+      value: "10.1029/2026GL124175"
+  url: "https://doi.org/10.1029/2026GL124175"
